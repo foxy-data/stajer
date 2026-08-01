@@ -205,7 +205,7 @@ input[type=range]{width:100%;height:5px;border-radius:3px;accent-color:var(--gol
   <button class="tab" data-panel="panel1" onclick="switchTab('panel1')">Дні 8–30</button>
   <button class="tab" data-panel="panel2" onclick="switchTab('panel2')">Дні 31–60</button>
   <button class="tab" data-panel="panel3" onclick="switchTab('panel3')">Дні 61–90</button>
-  <button class="tab" data-panel="panel4" onclick="switchTab('panel4')">Мої дати</button>
+  <button class="tab" data-panel="panel4" onclick="switchTab('panel4')">Розрахунок</button>
   <button class="tab" data-panel="panel6" onclick="switchTab('panel6')">Важливо</button>
 </div>
 
@@ -413,13 +413,6 @@ input[type=range]{width:100%;height:5px;border-radius:3px;accent-color:var(--gol
     <div class="period-total" style="border-left:3px solid var(--green)">
       <span class="l">Макс. за Період 4 (130%)</span>
       <span class="v" id="p3total130" style="color:var(--green)">—</span>
-    </div>
-
-    <!-- GRAND TOTAL -->
-    <div class="grand-total" style="margin-top:20px">
-      <div class="gt-label">Загальний дохід за 90 днів</div>
-      <div class="gt-row"><span>При 100% / 100% / 100%</span><span id="grand100" style="color:var(--blue)">—</span></div>
-      <div class="gt-row"><span>При 100% / 130% / 130%</span><span id="grand130" style="color:var(--green)">—</span></div>
     </div>
 
   </div>
@@ -836,8 +829,6 @@ function calcDates(){
   document.getElementById('p3total100').textContent=money(p3tot100);
   document.getElementById('p3total130').textContent=money(p3tot130);
 
-  document.getElementById('grand100').textContent=money(p0tot+p1tot+p2tot100+p3tot100);
-  document.getElementById('grand130').textContent=money(p0tot+p1tot+p2tot130+p3tot130);
   document.getElementById('dateResult').style.display='block';
 }
 
