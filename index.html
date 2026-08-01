@@ -4,171 +4,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Система мотивації стажера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0d0f14;--bg2:#141720;--bg3:#1b1f2e;--bg4:#21263a;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --text:#e4e8f4;--muted:#6e7a99;--faint:#3a4060;
-  --blue:#4f8ef7;--violet:#8b6cf7;--teal:#1dd4b4;--green:#3dd68c;
-  --gold:#f5c842;--orange:#f5923e;--red:#f55f5f;
-  --r:14px;--rsm:9px;
+  --bg:#111319;--bg2:#1a1d26;--bg3:#20232e;--bg4:#282c39;
+  --border:rgba(255,255,255,0.09);--border2:rgba(255,255,255,0.17);
+  --text:#f5f5f8;--muted:#9296a5;--faint:#333748;
+  --blue:#5b93ff;--teal:#a988ff;--gold:#ff7a1f;
+  --green:#33d883;--orange:#ffb545;--red:#ff6461;
+  --r:18px;--rsm:12px;
+  --shadow:0 1px 2px rgba(10,10,20,.5),0 10px 26px -14px rgba(10,10,20,.6);
+  --serif:'Manrope',var(--sans);
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'Manrope',var(--sans);
 }
 [data-theme="light"]{
-  --bg:#f0f2f8;--bg2:#ffffff;--bg3:#e8eaf2;--bg4:#dde0ed;
-  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
-  --text:#1a1d2e;--muted:#7a82a0;--faint:#c8cce0;
-  --blue:#3a7ef0;--violet:#7055e0;--teal:#0fbfa6;--green:#28c078;
-  --gold:#d4a800;--orange:#d97820;--red:#d94040;
+  --bg:#f2f3f7;--bg2:#ffffff;--bg3:#eef0f5;--bg4:#e7e9f0;
+  --border:rgba(20,20,35,0.08);--border2:rgba(20,20,35,0.14);
+  --text:#181920;--muted:#6d7080;--faint:#e3e5ee;
+  --blue:#2d6cdf;--teal:#7c4dff;--gold:#ff6a00;
+  --green:#17a768;--orange:#f0940a;--red:#e5484d;
+  --shadow:0 1px 2px rgba(20,20,50,.04),0 10px 26px -16px rgba(20,20,50,.16);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
-.page{max-width:680px;margin:0 auto;padding:24px 16px 60px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14.5px;line-height:1.65;min-height:100vh;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.page{max-width:640px;margin:0 auto;padding:20px 20px 70px}
 
 /* HERO */
-.hero{text-align:center;padding:32px 0 28px;position:relative}
-.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
-.hero h1{font-size:26px;font-weight:900;letter-spacing:-0.8px;line-height:1.2;margin-bottom:10px}
-.hero h1 span{background:linear-gradient(120deg,#FF6600,#FF8C00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{color:var(--muted);font-size:13px;max-width:420px;margin:0 auto 24px}
-.hero-duration{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.dur-pill{background:var(--bg3);border:1px solid var(--border2);border-radius:30px;padding:6px 16px;font-size:12px;font-weight:600}
-.dur-pill span{color:var(--blue)}
+.hero{padding:40px 0 28px;text-align:center}
+.hero-eyebrow{display:inline-block;font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,transparent);padding:6px 12px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-family:var(--serif);font-size:34px;font-weight:800;letter-spacing:-0.6px;line-height:1.18;margin-bottom:14px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),var(--orange) 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--muted);font-size:14.5px;max-width:440px;margin:0 auto 26px}
+.hero-datepick{display:inline-flex;flex-direction:column;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:18px 22px;box-shadow:var(--shadow)}
+.hero-datepick-lbl{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+.hero-datepick .date-input{min-width:200px;text-align:center}
 
 /* NAV TABS */
-.tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:4px;margin-bottom:28px}
-.tab{flex:1;text-align:center;padding:10px 8px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;border:none;background:none}
-.tab.active{background:var(--bg4);color:var(--text);border:1px solid var(--border2)}
-.tab-icon{display:block;font-size:18px;margin-bottom:2px}
+.tabs{display:flex;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:5px;margin-bottom:28px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;box-shadow:var(--shadow)}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:9px 15px;font-size:12.5px;font-weight:700;cursor:pointer;color:var(--muted);white-space:nowrap;background:none;border:none;border-radius:11px;transition:all .15s}
+.tab.active{color:#fff;background:linear-gradient(135deg,var(--gold),var(--orange));box-shadow:0 4px 12px -4px color-mix(in srgb,var(--gold) 60%,transparent)}
 
 /* PANELS */
 .panel{display:none}
-.panel.active{display:block}
+.panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+
+/* LEDGER HEADER */
+.ledger-head{display:flex;align-items:center;gap:14px;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+.ledger-num{font-family:var(--serif);font-size:16px;font-weight:800;line-height:1;flex-shrink:0;width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--muted)}
+.ledger-title{font-family:var(--serif);font-size:19px;font-weight:800;letter-spacing:-.2px;margin-bottom:2px}
+.ledger-sub{font-size:12.5px;color:var(--muted)}
 
 /* SECTION LABEL */
-.sec-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin:24px 0 10px}
+.sec-label:first-child{margin-top:0}
 
-/* PERIOD HERO CARD */
-.period-hero{border-radius:var(--r);padding:20px 22px;margin-bottom:18px;position:relative;overflow:hidden}
-.period-hero.blue{background:linear-gradient(135deg,rgba(79,142,247,.14),rgba(139,108,247,.08));border:1px solid rgba(79,142,247,.3)}
-.period-hero.teal{background:linear-gradient(135deg,rgba(29,212,180,.12),rgba(61,214,140,.08));border:1px solid rgba(29,212,180,.3)}
-.period-hero-num{position:absolute;right:16px;top:12px;font-size:64px;font-weight:900;opacity:.06;letter-spacing:-4px;line-height:1}
-.period-hero-tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.period-hero.blue .period-hero-tag{color:var(--blue)}
-.period-hero.teal .period-hero-tag{color:var(--teal)}
-.period-hero-title{font-size:22px;font-weight:900;margin-bottom:4px}
-.period-hero-sub{font-size:13px;color:var(--muted)}
+/* STAT LINES (replaces boxy info cards) */
+.stat-list{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:2px 16px;box-shadow:var(--shadow)}
+.stat-line{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.stat-line:last-child{border-bottom:none}
+.stat-line .lbl{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:9px;font-weight:500}
+.stat-line .sw{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+.stat-line .val{font-family:var(--mono);font-weight:800;font-size:15px}
 
-/* INFO CARDS ROW */
-.cards-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.cards-row.c3{grid-template-columns:1fr 1fr 1fr}
-.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
-.info-card-icon{font-size:22px;margin-bottom:6px}
-.info-card-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px}
-.info-card-val{font-size:18px;font-weight:800}
-.info-card-note{font-size:11px;color:var(--muted);margin-top:2px}
-.blue-val{color:var(--blue)} .teal-val{color:var(--teal)} .gold-val{color:var(--gold)} .green-val{color:var(--green)} .orange-val{color:var(--orange)}
+/* FORMULA */
+.formula{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:14px 16px;margin:12px 0;font-family:var(--mono);font-weight:600;font-size:12.5px;line-height:1.9;border-left-width:4px;border-left-style:solid;box-shadow:var(--shadow)}
+.formula .k{color:var(--muted);font-weight:500}
 
-/* FORMULA BOX */
-.formula-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
-.formula-box-title{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.formula-box-title::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--blue);flex-shrink:0}
-.formula-box.teal .formula-box-title::before{background:var(--teal)}
-.formula-line{font-size:13px;padding:6px 10px;background:var(--bg4);border-radius:6px;font-family:'SF Mono','Fira Code','Fira Mono','Roboto Mono',monospace;color:var(--text);margin-bottom:6px;line-height:1.5}
-.formula-line:last-child{margin-bottom:0}
-.formula-line .hl-blue{color:var(--blue);font-weight:700}
-.formula-line .hl-teal{color:var(--teal);font-weight:700}
-.formula-line .hl-gold{color:var(--gold);font-weight:700}
-.formula-line .hl-green{color:var(--green);font-weight:700}
-.formula-line .hl-orange{color:var(--orange);font-weight:700}
-.formula-line .hl-muted{color:var(--muted)}
+/* NOTE */
+.note{background:var(--bg3);border-radius:var(--rsm);padding:13px 16px;font-size:13px;color:var(--muted);margin:16px 0;line-height:1.65}
+.note b{color:var(--text);font-weight:700}
+.note.emph{background:color-mix(in srgb,var(--gold) 10%,var(--bg2));border:1px solid color-mix(in srgb,var(--gold) 30%,transparent)}
+.note-tag{font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px}
 
-/* WEIGHT TABLE */
-.weight-table{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
-.wt-header{display:grid;grid-template-columns:1fr 70px 70px 70px 70px;gap:0;background:var(--bg3);padding:8px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
-.wt-row{display:grid;grid-template-columns:1fr 70px 70px 70px 70px;gap:0;padding:10px 16px;border-top:1px solid var(--border);align-items:center}
-.wt-row:hover{background:var(--bg3)}
-.wt-metric{display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px}
-.wt-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.wt-dot.blue{background:var(--blue)} .wt-dot.teal{background:var(--teal)} .wt-dot.gold{background:var(--gold)}
-.wt-cell{text-align:center;font-size:13px;font-weight:700}
-.wt-weight-big{font-size:18px;font-weight:900}
+/* INCOME RULE (panel Важливо) */
+.rule-row{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--border)}
+.rule-row:first-child{border-top:none;padding-top:2px}
+.rule-num{font-family:var(--serif);font-size:14px;font-weight:800;color:#fff;background:var(--gold);flex-shrink:0;width:26px;height:26px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.rule-text{font-size:13.5px;line-height:1.6}
+.rule-text b{font-weight:700}
+.rule-text .muted{color:var(--muted);font-size:12.5px;display:block;margin-top:2px}
 
-/* ALERT / NOTE */
-.note-box{border-radius:var(--r);padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start}
-.note-box.warn{background:rgba(245,146,62,.08);border:1px solid rgba(245,146,62,.25)}
-.note-box.info{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.2)}
-.note-box.success{background:rgba(61,214,140,.07);border:1px solid rgba(61,214,140,.2)}
-.note-icon{font-size:20px;flex-shrink:0;margin-top:1px}
-.note-content{font-size:13px;line-height:1.6}
-.note-content b{color:var(--text)}
-.note-content .muted{color:var(--muted)}
+.cheat-item{padding:12px 0;border-top:1px solid var(--border);font-size:13px;line-height:1.6;color:var(--muted)}
+.cheat-item:first-child{border-top:none}
+.cheat-item b{color:var(--text);font-weight:700}
+.cheat-item em{font-style:normal;color:var(--gold);font-weight:700}
 
-/* INCOME RULE */
-.income-rule{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
-.income-rule-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px}
-.ir-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
-.ir-row:first-of-type{border-top:none;padding-top:0}
-.ir-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
-.ir-num.blue{background:rgba(79,142,247,.2);color:var(--blue)}
-.ir-num.green{background:rgba(61,214,140,.2);color:var(--green)}
-.ir-text{font-size:13px;line-height:1.6}
-.ir-text b{color:var(--text)}
-.ir-text .muted{color:var(--muted);font-size:12px}
+/* CALC (панелі Дати / Калькулятор) */
+.calc-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.calc-title{font-family:var(--sans);font-size:12px;font-weight:800;letter-spacing:.2px;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.calc-title::before{content:'';width:9px;height:9px;border-radius:3px;flex-shrink:0;background:var(--blue)}
+.calc-title.t2::before{background:var(--teal)}
+.calc-title.t3::before{background:var(--gold)}
+.slider-group{margin-bottom:16px}
+.slider-group:last-of-type{margin-bottom:0}
+.slider-label{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:8px}
+.slider-label span:first-child{color:var(--muted);font-weight:500}
+.slider-label span:last-child{font-family:var(--mono);font-weight:800;font-size:13.5px}
+input[type=range]{width:100%;height:5px;border-radius:3px;accent-color:var(--gold);cursor:pointer;background:var(--faint);outline:none}
+.results-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px}
+.res-cell{background:var(--bg3);border-radius:var(--rsm);padding:12px 10px;text-align:center}
+.res-cell-lbl{font-size:9.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.res-cell-val{font-family:var(--mono);font-size:15px;font-weight:800}
+.res-detail{margin-top:10px;background:var(--bg3);border-radius:var(--rsm);padding:10px 12px;font-size:11.5px;color:var(--muted);font-family:var(--mono);font-weight:600}
 
-/* PROGRESS VIS */
-.progress-vis{background:var(--bg3);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
-.pv-title{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
-.pv-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.pv-row:last-child{margin-bottom:0}
-.pv-label{width:90px;font-size:12px;color:var(--muted);flex-shrink:0}
-.pv-bar-wrap{flex:1;background:var(--faint);border-radius:4px;height:8px;overflow:hidden}
-.pv-bar{height:100%;border-radius:4px;transition:width .4s}
-.pv-value{width:44px;text-align:right;font-size:12px;font-weight:700;flex-shrink:0}
+.date-input{width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:15px;font-weight:700;font-family:var(--mono);padding:12px 14px;outline:none}
 
-/* INTERACTIVE CALC (panel 3) */
-.calc-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:16px}
-.cs-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.cs-title::before{content:'';width:3px;height:16px;border-radius:2px;background:var(--blue);flex-shrink:0}
-.cs-title.t2::before{background:var(--teal)}
-.slider-group{margin-bottom:14px}
-.slider-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
-.slider-label span:first-child{color:var(--muted)}
-.slider-label span:last-child{font-weight:700;font-size:13px}
-input[type=range]{width:100%;height:4px;border-radius:2px;accent-color:var(--blue);cursor:pointer;background:var(--faint);outline:none}
-.results-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
-.res-cell{background:var(--bg3);border-radius:var(--rsm);padding:10px 12px;text-align:center}
-.res-cell-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.res-cell-val{font-size:15px;font-weight:800}
+.chunk-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:17px 18px;margin-bottom:10px;border-left-width:4px;border-left-style:solid;box-shadow:var(--shadow)}
+.chunk-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.chunk-date{font-family:var(--serif);font-size:16px;font-weight:800;letter-spacing:-.2px}
+.chunk-days{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:600}
+.period-total{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:15px 17px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow)}
+.period-total .l{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.period-total .v{font-family:var(--mono);font-size:18px;font-weight:800}
+.grand-total{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 12%,var(--bg2)),var(--bg2));border:1px solid var(--border2);border-radius:var(--r);padding:22px;margin-bottom:14px;box-shadow:var(--shadow)}
+.grand-total .gt-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px}
+.gt-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0}
+.gt-row span:first-child{font-size:13px;color:var(--muted);font-weight:500}
+.gt-row span:last-child{font-family:var(--mono);font-size:17px;font-weight:800}
 
-/* FOOTER NOTE */
-.footer-note{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-top:8px}
-.fn-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:10px}
-.fn-item{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--border);font-size:13px;line-height:1.5;color:var(--muted)}
-.fn-item:first-of-type{border-top:none;padding-top:0}
-.fn-item b{color:var(--text)}
-.fn-item .em{color:var(--gold)}
+.field-row{margin-bottom:10px}
+.field-lbl{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.field-input-wrap{display:flex;align-items:center;gap:9px}
+.field-input{flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:14px;font-weight:700;font-family:var(--mono);padding:9px 11px;outline:none}
+.field-pct{font-size:12px;color:var(--muted)}
+.field-res{min-width:84px;text-align:right;font-family:var(--mono);font-size:13px;font-weight:800;color:var(--muted)}
 
 /* THEME TOGGLE */
-.theme-toggle{position:fixed;top:14px;right:14px;z-index:100;background:var(--bg3);border:1px solid var(--border2);border-radius:30px;padding:6px 12px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--muted);transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.2)}
-.theme-toggle:hover{color:var(--text);border-color:var(--blue)}
-.theme-toggle svg{width:14px;height:14px;flex-shrink:0}
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:100;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:7px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--muted);transition:all .15s;box-shadow:var(--shadow)}
+.theme-toggle:hover{color:var(--gold);border-color:var(--gold)}
+.theme-toggle svg{width:13px;height:13px;flex-shrink:0}
 
 /* PASSWORD SCREEN */
 #lockScreen{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
-.lock-box{width:100%;max-width:340px;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:36px 28px;text-align:center}
-.lock-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,rgba(79,142,247,.2),rgba(139,108,247,.15));border:1px solid rgba(79,142,247,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.lock-icon svg{width:22px;height:22px;color:var(--blue)}
-.lock-title{font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:6px}
-.lock-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
-.lock-input{width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;color:var(--text);font-size:16px;font-weight:700;padding:12px 16px;outline:none;text-align:center;letter-spacing:2px;transition:border-color .2s}
-.lock-input:focus{border-color:var(--blue)}
+.lock-box{width:100%;max-width:320px;text-align:center}
+.lock-icon{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 8px 20px -8px color-mix(in srgb,var(--gold) 60%,transparent)}
+.lock-icon svg{width:22px;height:22px;color:#fff}
+.lock-title{font-family:var(--serif);font-size:22px;font-weight:800;margin-bottom:6px}
+.lock-sub{font-size:13px;color:var(--muted);margin-bottom:26px}
+.lock-input{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:16px;font-weight:700;font-family:var(--mono);padding:13px 16px;outline:none;text-align:center;letter-spacing:2px;transition:border-color .2s;box-shadow:var(--shadow)}
+.lock-input:focus{border-color:var(--gold)}
 .lock-input.error{border-color:var(--red);animation:shake .3s ease}
-.lock-btn{margin-top:14px;width:100%;background:var(--blue);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:800;padding:13px;cursor:pointer;transition:opacity .2s}
-.lock-btn:hover{opacity:.85}
-.lock-error{margin-top:10px;font-size:12px;color:var(--red);font-weight:600;min-height:18px}
+.lock-btn{margin-top:14px;width:100%;background:linear-gradient(135deg,var(--gold),var(--orange));border:none;border-radius:var(--rsm);color:#fff;font-size:14px;font-weight:800;padding:13px;cursor:pointer;transition:opacity .2s;box-shadow:0 8px 18px -8px color-mix(in srgb,var(--gold) 55%,transparent)}
+.lock-btn:hover{opacity:.88}
+.lock-error{margin-top:10px;font-size:12px;color:var(--red);font-weight:700;min-height:18px}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* CALC MODAL (opens on demand) */
+.calc-open-row{display:flex;justify-content:center;margin-bottom:28px}
+.calc-open-btn{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:9px 18px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;box-shadow:var(--shadow);transition:all .15s}
+.calc-open-btn:hover{border-color:var(--gold);color:var(--gold)}
+.calc-modal{position:fixed;inset:0;z-index:300;background:rgba(10,10,20,.55);display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.calc-modal.active{display:flex}
+.calc-modal-inner{background:var(--bg);border-radius:var(--r);max-width:640px;width:100%;padding:24px 20px 30px;position:relative;box-shadow:var(--shadow);margin:20px 0}
+.calc-modal-title{font-family:var(--serif);font-size:19px;font-weight:800;margin-bottom:18px;text-align:center}
+.calc-modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border2);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;line-height:1;color:var(--muted)}
+.calc-modal-close:hover{color:var(--red);border-color:var(--red)}
 </style>
 </head>
 <body>
@@ -195,262 +191,265 @@ input[type=range]{width:100%;height:4px;border-radius:2px;accent-color:var(--blu
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Система мотивації стажера</div>
-  <h1>Твій старт у продажах:<br><span>як заробляти на стажуванні</span></h1>
-  <p class="hero-sub">Чітко, прозоро, по-кроково — все що потрібно знати про свій дохід у перші 60 днів</p>
-  <div class="hero-duration">
-    <div class="dur-pill">Досвідчений: <span>10 днів</span></div>
-    <div class="dur-pill">Стандарт: <span>60 днів</span></div>
+  <h1>Твій старт у продажах:<br><em>як заробляти на стажуванні</em></h1>
+  <p class="hero-sub">Чітко й по кроках — усе, що потрібно знати про дохід у перші 90 днів.</p>
+  <div class="hero-datepick">
+    <span class="hero-datepick-lbl">Дата початку стажування</span>
+    <input type="date" id="startDate" class="date-input" onchange="calcDates()">
   </div>
 </div>
 
 <!-- TABS -->
 <div class="tabs">
-  <button class="tab active" onclick="switchTab(0)">
-    <span class="tab-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 10h6M7 13h4"/></svg></span>Дні 1–30</button>
-  <button class="tab" onclick="switchTab(1)">
-    <span class="tab-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M4 14l4-4 3 3 5-6"/></svg></span>Дні 31–60</button>
-  <button class="tab" onclick="switchTab(2)">
-    <span class="tab-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M8 4V3M12 4V3"/></svg></span>Мої дати</button>
-  <button class="tab" onclick="switchTab(3)">
-    <span class="tab-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M10 4v12M4 10h12"/><circle cx="10" cy="10" r="7"/></svg></span>Калькулятор</button>
-  <button class="tab" onclick="switchTab(4)">
-    <span class="tab-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="10" cy="10" r="7"/><path d="M10 9v5M10 7v.5"/></svg></span>Важливо</button>
+  <button class="tab active" data-panel="panel0" onclick="switchTab('panel0')">Дні 1–7</button>
+  <button class="tab" data-panel="panel1" onclick="switchTab('panel1')">Дні 8–30</button>
+  <button class="tab" data-panel="panel2" onclick="switchTab('panel2')">Дні 31–60</button>
+  <button class="tab" data-panel="panel3" onclick="switchTab('panel3')">Дні 61–90</button>
+  <button class="tab" data-panel="panel4" onclick="switchTab('panel4')">Мої дати</button>
+  <button class="tab" data-panel="panel6" onclick="switchTab('panel6')">Важливо</button>
 </div>
 
-<!-- ═══════════════════════ PANEL 1 ═══════════════════════ -->
+<div class="calc-open-row">
+  <button class="calc-open-btn" onclick="openCalcModal()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8" y2="12"/><line x1="12" y1="12" x2="12" y2="12"/><line x1="16" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="12" y1="16" x2="12" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+    Відкрити калькулятор
+  </button>
+</div>
+
+<!-- ═══════════════════════ PANEL 0 — ДНІ 1-7 ═══════════════════════ -->
 <div class="panel active" id="panel0">
 
-  <div class="period-hero blue">
-    <div class="period-hero-num">1</div>
-    <div class="period-hero-tag">Перший Період</div>
-    <div class="period-hero-title">Дні 1 – 30</div>
-    <div class="period-hero-sub">Один загальний план · Три показники разом · Оклад пропорційно до виконання</div>
-  </div>
-
-  <div class="sec-label">Твій план</div>
-  <div class="cards-row c3">
-    <div class="info-card">
-      <div class="info-card-lbl">Розмір плану</div>
-      <div class="info-card-val blue-val">25%</div>
-      <div class="info-card-note">від навантаження продавця</div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-lbl">Що входить</div>
-      <div class="info-card-val" style="font-size:13px;margin-top:4px">ОТ + АСС<br>+ Послуги</div>
-      <div class="info-card-note">сума трьох показників</div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-lbl">Ціль</div>
-      <div class="info-card-val green-val">100%</div>
-      <div class="info-card-note">максимум виконання</div>
+  <div class="ledger-head">
+    <div class="ledger-num" style="background:var(--muted)">01</div>
+    <div>
+      <div class="ledger-title">Адаптація · Дні 1–7</div>
+      <div class="ledger-sub">Плану немає — виконання зараховується як 100%</div>
     </div>
   </div>
 
-  <div class="sec-label">Формула розрахунку</div>
-  <div class="formula-box">
-    <div class="formula-box-title">Як рахується план</div>
-    <div class="formula-line"><span class="hl-muted">План =</span> <span class="hl-blue">Навантаження продавця</span> × <span class="hl-gold">25%</span></div>
-    <div class="formula-line"><span class="hl-muted">Виконання =</span> <span class="hl-blue">Факт (ОТ + АСС + Послуги)</span> ÷ <span class="hl-blue">План</span></div>
-    <div class="formula-line"><span class="hl-muted">Оклад =</span> <span class="hl-gold">Базовий оклад</span> × <span class="hl-green">% виконання</span></div>
+  <div class="formula" style="border-left-color:var(--muted)">
+    <span class="k">Оклад =</span> Базовий оклад × <b>100%</b> × <span class="k">Кр.ч.</span>
   </div>
 
-  <div class="note-box info">
-    <div class="note-content">
-      Показники ОТ, АСС та Послуги <b>рахуються разом</b> як одна сума. Не принципово, який із трьох ти виконав краще — головне загальний результат.
-    </div>
-  </div>
-
-  <div class="sec-label">Приклад виконання</div>
-  <div class="progress-vis">
-    <div class="pv-title">Як % виконання впливає на оклад</div>
-    <div class="pv-row">
-      <span class="pv-label">50% факту</span>
-      <div class="pv-bar-wrap"><div class="pv-bar" style="width:50%;background:var(--red)"></div></div>
-      <span class="pv-value" style="color:var(--red)">50%</span>
-    </div>
-    <div class="pv-row">
-      <span class="pv-label">70% факту</span>
-      <div class="pv-bar-wrap"><div class="pv-bar" style="width:70%;background:var(--orange)"></div></div>
-      <span class="pv-value" style="color:var(--orange)">70%</span>
-    </div>
-    <div class="pv-row">
-      <span class="pv-label">85% факту</span>
-      <div class="pv-bar-wrap"><div class="pv-bar" style="width:85%;background:var(--gold)"></div></div>
-      <span class="pv-value" style="color:var(--gold)">85%</span>
-    </div>
-    <div class="pv-row">
-      <span class="pv-label">100% факту</span>
-      <div class="pv-bar-wrap"><div class="pv-bar" style="width:100%;background:var(--green)"></div></div>
-      <span class="pv-value" style="color:var(--green)">100%</span>
-    </div>
-  </div>
-
-  <div class="note-box warn">
-    <div class="note-content">
-      <b>Максимум — 100%.</b> Навіть якщо перевиконаєш план, оклад у 1-й період не зростає понад базовий. Надлишок не враховується. Але <b>бонуси за конкурси</b> діють поверх окладу!
-    </div>
+  <div class="note emph">
+    <span class="note-tag">Важливо</span>
+    Хоча план офіційно стартує з 8-го дня, продажі можна робити вже з 1-го — вони підуть у залік наступного періоду (8–30 днів). Оклад за ці 7 днів залежить лише від фактично відпрацьованого часу.
   </div>
 
 </div>
 
-<!-- ═══════════════════════ PANEL 2 ═══════════════════════ -->
+<!-- ═══════════════════════ PANEL 1 — ДНІ 8-30 ═══════════════════════ -->
 <div class="panel" id="panel1">
 
-  <div class="period-hero teal">
-    <div class="period-hero-num">2</div>
-    <div class="period-hero-tag">Другий Період</div>
-    <div class="period-hero-title">Дні 31 – 60</div>
-    <div class="period-hero-sub">Три окремих плани · Індивідуальна вага · Можна заробити до 130% окладу</div>
-  </div>
-
-  <div class="sec-label">Твій план</div>
-  <div class="cards-row">
-    <div class="info-card">
-      <div class="info-card-lbl">Розмір плану</div>
-      <div class="info-card-val teal-val">50%</div>
-      <div class="info-card-note">від навантаження по кожному показнику</div>
-    </div>
-    <div class="info-card">
-      <div class="info-card-lbl">Максимальний дохід</div>
-      <div class="info-card-val green-val">130%</div>
-      <div class="info-card-note">окладу при перевиконанні</div>
+  <div class="ledger-head">
+    <div class="ledger-num" style="background:var(--blue)">02</div>
+    <div>
+      <div class="ledger-title">Дні 8–30</div>
+      <div class="ledger-sub">Один загальний план · максимум оклад 100%</div>
     </div>
   </div>
 
-  <div class="sec-label">Вага показників</div>
-  <div class="weight-table">
-    <div class="wt-header">
-      <span>Показник</span>
-      <span style="text-align:center">Вага</span>
-      <span style="text-align:center">Мін.</span>
-      <span style="text-align:center">Макс.</span>
-      <span style="text-align:center">План</span>
-    </div>
-    <div class="wt-row">
-      <div class="wt-metric"><div class="wt-dot blue"></div>ОТ</div>
-      <div class="wt-cell"><span class="wt-weight-big blue-val">50%</span></div>
-      <div class="wt-cell" style="color:var(--red)">0%</div>
-      <div class="wt-cell" style="color:var(--green)">130%</div>
-      <div class="wt-cell" style="color:var(--muted);font-size:11px">нав.×50%</div>
-    </div>
-    <div class="wt-row">
-      <div class="wt-metric"><div class="wt-dot teal"></div>Послуги</div>
-      <div class="wt-cell"><span class="wt-weight-big teal-val">30%</span></div>
-      <div class="wt-cell" style="color:var(--red)">0%</div>
-      <div class="wt-cell" style="color:var(--green)">130%</div>
-      <div class="wt-cell" style="color:var(--muted);font-size:11px">нав.×50%</div>
-    </div>
-    <div class="wt-row">
-      <div class="wt-metric"><div class="wt-dot gold"></div>АСС</div>
-      <div class="wt-cell"><span class="wt-weight-big gold-val">20%</span></div>
-      <div class="wt-cell" style="color:var(--red)">0%</div>
-      <div class="wt-cell" style="color:var(--green)">130%</div>
-      <div class="wt-cell" style="color:var(--muted);font-size:11px">нав.×50%</div>
-    </div>
+  <div class="sec-label">План</div>
+  <div class="stat-list">
+    <div class="stat-line"><span class="lbl">Навантаження</span><span class="val" style="color:var(--blue)">25% від ПК</span></div>
   </div>
 
-  <div class="sec-label">Формула розрахунку</div>
-  <div class="formula-box teal">
-    <div class="formula-box-title">Формула плану</div>
-    <div class="formula-line"><span class="hl-muted">План ОТ =</span> <span class="hl-blue">Навантаження ОТ</span> × <span class="hl-gold">50%</span></div>
-    <div class="formula-line"><span class="hl-muted">План Послуг =</span> <span class="hl-teal">Навантаження Послуг</span> × <span class="hl-gold">50%</span></div>
-    <div class="formula-line"><span class="hl-muted">План АСС =</span> <span class="hl-gold">Навантаження АСС</span> × <span class="hl-gold">50%</span></div>
-  </div>
-  <div class="formula-box teal">
-    <div class="formula-box-title">Формула окладу</div>
-    <div class="formula-line">Оклад = <span class="hl-blue">Оклад × 50%</span> × <span class="hl-blue">%ОТ</span></div>
-    <div class="formula-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="hl-teal">Оклад × 30%</span> × <span class="hl-teal">%Послуги</span></div>
-    <div class="formula-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="hl-gold">Оклад × 20%</span> × <span class="hl-gold">%АСС</span></div>
+  <div class="formula" style="border-left-color:var(--blue)">
+    <span class="k">План =</span> Навантаження ПК × <b>25%</b> × <span class="k">Кр.ч.</span><br>
+    <span class="k">Оклад =</span> Базовий оклад × <b>% виконання</b> <span class="k">(макс. 100%)</span>
   </div>
 
-  <div class="note-box success">
-    <div class="note-content">
-      У 2-му періоді кожен показник рахується <b>окремо</b>. Перевиконання по ОТ не перекриває недовиконання по АСС. Зате перевиконавши хоча б один — ти вже заробляєш <b>понад 100% окладу</b>.
-    </div>
-  </div>
-
-  <div class="note-box info">
-    <div class="note-content">
-      Чим більша вага показника — тим важливіше його виконати. <b>ОТ</b> має найбільшу вагу (50%), тому саме товарообіг найбільше впливає на твій оклад.
-    </div>
+  <div class="note">
+    Продажі з 1-го дня стажування вже йдуть у залік цього плану. Перевиконання оклад не збільшує — надлишок понад 100% не враховується, але <b>бонуси за конкурси</b> нараховуються поверх окладу.
   </div>
 
 </div>
 
-<!-- ═══════════════════════ PANEL 2 — DATES ═══════════════════════ -->
+<!-- ═══════════════════════ PANEL 2 — ДНІ 31-60 ═══════════════════════ -->
 <div class="panel" id="panel2">
 
-  <div class="calc-section">
-    <div class="cs-title">Дата початку стажування</div>
-    <div class="slider-group" style="margin-bottom:0">
-      <div class="slider-label" style="margin-bottom:10px"><span style="color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px">Обери дату старту</span></div>
-      <input type="date" id="startDate" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:16px;font-weight:700;padding:12px 14px;outline:none;-webkit-appearance:none;appearance:none;" onchange="calcDates()">
+  <div class="ledger-head">
+    <div class="ledger-num" style="background:var(--teal)">03</div>
+    <div>
+      <div class="ledger-title">Дні 31–60</div>
+      <div class="ledger-sub">Три окремих плани · до 130% окладу</div>
     </div>
   </div>
+
+  <div class="sec-label">Навантаження за планом</div>
+  <div class="stat-list">
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--blue)"></span>ТО</span><span class="val">50%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--teal)"></span>Послуги</span><span class="val">25%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--gold)"></span>АСС</span><span class="val">50%</span></div>
+  </div>
+
+  <div class="sec-label">Вага показника в окладі</div>
+  <div class="stat-list">
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--blue)"></span>ТО</span><span class="val">50%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--teal)"></span>Послуги</span><span class="val">30%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--gold)"></span>АСС</span><span class="val">20%</span></div>
+  </div>
+
+  <div class="formula" style="border-left-color:var(--teal)">
+    <span class="k">Оклад =</span> Окл×50%×%ТО + Окл×30%×%Посл + Окл×20%×%АСС <span class="k">— кожен незалежно, макс. 130%</span>
+  </div>
+
+  <div class="note emph">
+    <span class="note-tag">Головне</span>
+    Показники рахуються окремо: перевиконання по ТО не перекриває недовиконання по АСС. Зате перевиконавши хоч один — оклад уже перевищує 100%. Найбільше на оклад впливає ТО (найбільша вага), а план по Послугах — найлегший (25% замість 50%).
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ PANEL 3 — ДНІ 61-90 ═══════════════════════ -->
+<div class="panel" id="panel3">
+
+  <div class="ledger-head">
+    <div class="ledger-num" style="background:var(--gold)">04</div>
+    <div>
+      <div class="ledger-title">Дні 61–90</div>
+      <div class="ledger-sub">Три окремих плани · до 130% окладу</div>
+    </div>
+  </div>
+
+  <div class="sec-label">Навантаження за планом</div>
+  <div class="stat-list">
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--blue)"></span>ТО</span><span class="val">75%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--teal)"></span>Послуги</span><span class="val">50%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--gold)"></span>АСС</span><span class="val">75%</span></div>
+  </div>
+
+  <div class="sec-label">Вага показника в окладі</div>
+  <div class="stat-list">
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--blue)"></span>ТО</span><span class="val">50%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--teal)"></span>Послуги</span><span class="val">30%</span></div>
+    <div class="stat-line"><span class="lbl"><span class="sw" style="background:var(--gold)"></span>АСС</span><span class="val">20%</span></div>
+  </div>
+
+  <div class="formula" style="border-left-color:var(--gold)">
+    <span class="k">Оклад =</span> Окл×50%×%ТО + Окл×30%×%Посл + Окл×20%×%АСС <span class="k">— кожен незалежно, макс. 130%</span>
+  </div>
+
+  <div class="note">
+    Вага показників і максимум 130% — ті самі, що й у попередньому періоді. Відрізняється лише розмір навантаження: тут план вищий (75/50/75%), стажист виходить на майже повне навантаження продавця-консультанта.
+  </div>
+
+</div>
+
+<!-- ═══════════════════════ PANEL 4 — DATES ═══════════════════════ -->
+<div class="panel" id="panel4">
+
+  <div id="dateHint" class="note" style="text-align:center">Вкажи дату початку стажування у полі вгорі сторінки — розрахунок з'явиться тут.</div>
 
   <div id="dateResult" style="display:none">
 
+    <!-- PERIOD 0 -->
+    <div class="ledger-head" style="margin-bottom:12px">
+      <div class="ledger-num" style="background:var(--muted);font-size:19px;width:48px;height:48px">01</div>
+      <div>
+        <div class="ledger-title" id="p0title" style="font-size:16px">—</div>
+        <div class="ledger-sub">Базова ставка 18 000 грн · без плану · 100% гарантовано</div>
+      </div>
+    </div>
+
+    <div id="p0chunks"></div>
+
+    <div class="period-total" style="border-left:3px solid var(--muted)">
+      <span class="l">Гарантовано за Період 1</span>
+      <span class="v" id="p0total">—</span>
+    </div>
+
     <!-- PERIOD 1 -->
-    <div class="period-hero blue" style="margin-bottom:10px">
-      <div class="period-hero-num">1</div>
-      <div class="period-hero-tag">Перший Період · Дні 1–30</div>
-      <div class="period-hero-title" id="p1title">—</div>
-      <div class="period-hero-sub">Базова ставка 17 000 грн · план 25% навантаження · макс. 100%</div>
+    <div class="ledger-head" style="margin-bottom:12px">
+      <div class="ledger-num" style="background:var(--blue);font-size:19px;width:48px;height:48px">02</div>
+      <div>
+        <div class="ledger-title" id="p1title" style="font-size:16px">—</div>
+        <div class="ledger-sub">Базова ставка 18 000 грн · план 25% навантаження · макс. 100%</div>
+      </div>
     </div>
 
     <div id="p1chunks"></div>
 
-    <div style="background:var(--bg3);border:1px solid rgba(79,142,247,.2);border-radius:var(--r);padding:14px 16px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px">Макс. дохід за 1 Період (100%)</div>
-      <div id="p1total" style="font-size:20px;font-weight:900;color:var(--blue)">—</div>
+    <div class="period-total" style="border-left:3px solid var(--blue)">
+      <span class="l">Макс. дохід за Період 2 (100%)</span>
+      <span class="v" id="p1total" style="color:var(--blue)">—</span>
     </div>
 
     <!-- PERIOD 2 -->
-    <div class="period-hero teal" style="margin-bottom:10px">
-      <div class="period-hero-num">2</div>
-      <div class="period-hero-tag">Другий Період · Дні 31–60</div>
-      <div class="period-hero-title" id="p2title">—</div>
-      <div class="period-hero-sub">Базова ставка 17 000 грн · план 50% навантаження · макс. 130%</div>
+    <div class="ledger-head" style="margin-bottom:12px">
+      <div class="ledger-num" style="background:var(--teal);font-size:19px;width:48px;height:48px">03</div>
+      <div>
+        <div class="ledger-title" id="p2title" style="font-size:16px">—</div>
+        <div class="ledger-sub">Базова ставка 18 000 грн · план 50/25/50% · макс. 130%</div>
+      </div>
     </div>
 
     <div id="p2chunks"></div>
 
-    <div style="background:var(--bg3);border:1px solid rgba(29,212,180,.2);border-radius:var(--r);padding:14px 16px;margin-bottom:18px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px">Макс. дохід за 2 Період (100%)</div>
-        <div id="p2total100" style="font-size:18px;font-weight:900;color:var(--teal)">—</div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px">Макс. дохід за 2 Період (130%)</div>
-        <div id="p2total130" style="font-size:18px;font-weight:900;color:var(--green)">—</div>
+    <div class="period-total" style="border-left:3px solid var(--teal);margin-bottom:10px">
+      <span class="l">Макс. за Період 3 (100%)</span>
+      <span class="v" id="p2total100" style="color:var(--teal)">—</span>
+    </div>
+    <div class="period-total" style="border-left:3px solid var(--green)">
+      <span class="l">Макс. за Період 3 (130%)</span>
+      <span class="v" id="p2total130" style="color:var(--green)">—</span>
+    </div>
+
+    <!-- PERIOD 3 -->
+    <div class="ledger-head" style="margin-top:20px;margin-bottom:12px">
+      <div class="ledger-num" style="background:var(--gold);font-size:19px;width:48px;height:48px">04</div>
+      <div>
+        <div class="ledger-title" id="p3title" style="font-size:16px">—</div>
+        <div class="ledger-sub">Базова ставка 18 000 грн · план 75/50/75% · макс. 130%</div>
       </div>
     </div>
 
+    <div id="p3chunks"></div>
+
+    <div class="period-total" style="border-left:3px solid var(--gold);margin-bottom:10px">
+      <span class="l">Макс. за Період 4 (100%)</span>
+      <span class="v" id="p3total100" style="color:var(--gold)">—</span>
+    </div>
+    <div class="period-total" style="border-left:3px solid var(--green)">
+      <span class="l">Макс. за Період 4 (130%)</span>
+      <span class="v" id="p3total130" style="color:var(--green)">—</span>
+    </div>
+
     <!-- GRAND TOTAL -->
-    <div style="background:linear-gradient(135deg,rgba(79,142,247,.12),rgba(29,212,180,.08));border:1px solid rgba(79,142,247,.25);border-radius:var(--r);padding:18px 20px;margin-bottom:18px">
-      <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Загальний дохід за 60 днів</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <span style="font-size:13px;color:var(--muted)">При виконанні 100% / 100%</span>
-        <span id="grand100" style="font-size:20px;font-weight:900;color:var(--blue)">—</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:13px;color:var(--muted)">При виконанні 100% / 130%</span>
-        <span id="grand130" style="font-size:20px;font-weight:900;color:var(--green)">—</span>
-      </div>
+    <div class="grand-total" style="margin-top:20px">
+      <div class="gt-label">Загальний дохід за 90 днів</div>
+      <div class="gt-row"><span>При 100% / 100% / 100%</span><span id="grand100" style="color:var(--blue)">—</span></div>
+      <div class="gt-row"><span>При 100% / 130% / 130%</span><span id="grand130" style="color:var(--green)">—</span></div>
     </div>
 
   </div>
 
 </div>
 
-<!-- ═══════════════════════ PANEL 3 — CALC ═══════════════════════ -->
-<div class="panel" id="panel3">
+<!-- ═══════════════════════ CALC MODAL ═══════════════════════ -->
+<div class="calc-modal" id="calcModal">
+<div class="calc-modal-inner">
+  <div class="calc-modal-close" onclick="closeCalcModal()">✕</div>
+  <div class="calc-modal-title">Калькулятор доходу</div>
 
-  <div class="calc-section">
-    <div class="cs-title">1 Період · Дні 1–30</div>
+  <div class="calc-box">
+    <div class="calc-title">Період 1 · Дні 1–7</div>
+    <div class="slider-group" style="margin-bottom:0">
+      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c0base">18 000</span></div>
+      <input type="range" id="sl0base" min="10000" max="30000" step="500" value="18000" oninput="calc0()">
+    </div>
+    <div class="results-grid">
+      <div class="res-cell"><div class="res-cell-lbl">Оклад</div><div class="res-cell-val" id="r0oklad" style="color:var(--green)">—</div></div>
+      <div class="res-cell"><div class="res-cell-lbl">Виконання</div><div class="res-cell-val" style="color:var(--muted)">100%</div></div>
+      <div class="res-cell"><div class="res-cell-lbl">Від базового</div><div class="res-cell-val" style="color:var(--gold)">100%</div></div>
+    </div>
+  </div>
+
+  <div class="calc-box">
+    <div class="calc-title">Період 2 · Дні 8–30</div>
     <div class="slider-group">
-      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c1base">17 000</span></div>
-      <input type="range" id="sl1base" min="10000" max="30000" step="500" value="17000" oninput="calc1()">
+      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c1base">18 000</span></div>
+      <input type="range" id="sl1base" min="10000" max="30000" step="500" value="18000" oninput="calc1()">
     </div>
     <div class="slider-group">
       <div class="slider-label"><span>Виконання плану</span><span id="c1pct" style="color:var(--blue)">80%</span></div>
@@ -463,14 +462,14 @@ input[type=range]{width:100%;height:4px;border-radius:2px;accent-color:var(--blu
     </div>
   </div>
 
-  <div class="calc-section">
-    <div class="cs-title t2">2 Період · Дні 31–60</div>
+  <div class="calc-box">
+    <div class="calc-title t2">Період 3 · Дні 31–60</div>
     <div class="slider-group">
-      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c2base">17 000</span></div>
-      <input type="range" id="sl2base" min="10000" max="30000" step="500" value="17000" oninput="calc2()">
+      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c2base">18 000</span></div>
+      <input type="range" id="sl2base" min="10000" max="30000" step="500" value="18000" oninput="calc2()">
     </div>
     <div class="slider-group">
-      <div class="slider-label"><span>Виконання ОТ (вага 50%)</span><span id="c2ot" style="color:var(--blue)">80%</span></div>
+      <div class="slider-label"><span>Виконання ТО (вага 50%)</span><span id="c2ot" style="color:var(--blue)">80%</span></div>
       <input type="range" id="sl2ot" min="0" max="130" step="1" value="80" oninput="calc2()">
     </div>
     <div class="slider-group">
@@ -486,64 +485,78 @@ input[type=range]{width:100%;height:4px;border-radius:2px;accent-color:var(--blu
       <div class="res-cell"><div class="res-cell-lbl">Від базового</div><div class="res-cell-val" id="r2ratio" style="color:var(--gold)">—</div></div>
       <div class="res-cell"><div class="res-cell-lbl">Макс. можливо</div><div class="res-cell-val" id="r2max" style="color:var(--teal)">—</div></div>
     </div>
-    <div style="margin-top:10px;background:var(--bg3);border-radius:var(--rsm);padding:10px 12px;font-size:12px;color:var(--muted)">
-      Деталі: ОТ → <span id="rd2ot" style="color:var(--blue);font-weight:700">—</span>&nbsp;&nbsp;
-      Послуги → <span id="rd2serv" style="color:var(--teal);font-weight:700">—</span>&nbsp;&nbsp;
-      АСС → <span id="rd2acc" style="color:var(--gold);font-weight:700">—</span>
+    <div class="res-detail">
+      ТО → <span id="rd2ot" style="color:var(--blue)">—</span>&nbsp;&nbsp;
+      Послуги → <span id="rd2serv" style="color:var(--teal)">—</span>&nbsp;&nbsp;
+      АСС → <span id="rd2acc" style="color:var(--gold)">—</span>
+    </div>
+  </div>
+
+  <div class="calc-box">
+    <div class="calc-title t3">Період 4 · Дні 61–90</div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Базовий оклад (грн)</span><span id="c3base">18 000</span></div>
+      <input type="range" id="sl3base" min="10000" max="30000" step="500" value="18000" oninput="calc3()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Виконання ТО (вага 50%)</span><span id="c3ot" style="color:var(--blue)">80%</span></div>
+      <input type="range" id="sl3ot" min="0" max="130" step="1" value="80" oninput="calc3()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Виконання Послуги (вага 30%)</span><span id="c3serv" style="color:var(--teal)">80%</span></div>
+      <input type="range" id="sl3serv" min="0" max="130" step="1" value="80" oninput="calc3()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>Виконання АСС (вага 20%)</span><span id="c3acc" style="color:var(--gold)">80%</span></div>
+      <input type="range" id="sl3acc" min="0" max="130" step="1" value="80" oninput="calc3()">
+    </div>
+    <div class="results-grid">
+      <div class="res-cell"><div class="res-cell-lbl">Оклад</div><div class="res-cell-val" id="r3oklad" style="color:var(--green)">—</div></div>
+      <div class="res-cell"><div class="res-cell-lbl">Від базового</div><div class="res-cell-val" id="r3ratio" style="color:var(--gold)">—</div></div>
+      <div class="res-cell"><div class="res-cell-lbl">Макс. можливо</div><div class="res-cell-val" id="r3max" style="color:var(--teal)">—</div></div>
+    </div>
+    <div class="res-detail">
+      ТО → <span id="rd3ot" style="color:var(--blue)">—</span>&nbsp;&nbsp;
+      Послуги → <span id="rd3serv" style="color:var(--teal)">—</span>&nbsp;&nbsp;
+      АСС → <span id="rd3acc" style="color:var(--gold)">—</span>
     </div>
   </div>
 
 </div>
+</div>
 
-<!-- ═══════════════════════ PANEL 4 — INFO ═══════════════════════ -->
-<div class="panel" id="panel4">
+<!-- ═══════════════════════ PANEL 6 — INFO ═══════════════════════ -->
+<div class="panel" id="panel6">
 
-  <div class="income-rule">
-    <div class="income-rule-title">Що отримує стажер за місяць</div>
-    <div class="ir-row">
-      <div class="ir-num blue">1</div>
-      <div class="ir-text">
-        <b>Оклад + бонуси за конкурси</b> — якщо оклад (з конкурсними) більший за бонус з продажів (з урахуванням бонусу за продаж Ф та К)
-        <div class="muted">Тобто якщо «план-виконання» дає більше — беремо цей варіант</div>
-      </div>
+  <div class="sec-label">Що отримує стажер за місяць</div>
+  <div class="rule-row">
+    <div class="rule-num">1</div>
+    <div class="rule-text"><b>Оклад + бонуси за конкурси</b> — якщо ця сума більша за бонус з продажів
+      <span class="muted">Тобто якщо «план-виконання» дає більше — беремо цей варіант</span>
     </div>
-    <div class="ir-row">
-      <div class="ir-num green">2</div>
-      <div class="ir-text">
-        <b>Бонус за продажі</b> — якщо бонус з продажів (з урахуванням бонусу за продаж Ф та К) більший за оклад
-        <div class="muted">Тобто якщо реальні продажі принесли більше — стажер отримує саме їх</div>
-      </div>
+  </div>
+  <div class="rule-row">
+    <div class="rule-num">2</div>
+    <div class="rule-text"><b>Бонус за продажі</b> — якщо він більший за оклад
+      <span class="muted">Якщо реальні продажі принесли більше — стажер отримує саме їх</span>
     </div>
   </div>
 
-  <div class="note-box success">
-    <div class="note-content">
-      <b>Головне правило:</b> стажер завжди отримує більше з двох варіантів. Система захищає тебе — навіть якщо план виконаний не повністю, гарні реальні продажі можуть дати більший дохід.
-    </div>
+  <div class="note emph">
+    <span class="note-tag">Головне правило</span>
+    Стажер завжди отримує більшу з двох сум. Навіть якщо план виконаний не повністю, гарні реальні продажі можуть дати більший дохід.
   </div>
 
   <div class="sec-label">Коротка шпаргалка</div>
-  <div class="footer-note">
-    <div class="fn-title">Запам'ятай головне</div>
-    <div class="fn-item">
-      <span><b>Дні 1–30:</b> один загальний план = <em class="em">навантаження × 25%</em>. Оклад = базовий × % виконання. Макс. 100%.</span>
-    </div>
-    <div class="fn-item">
-      <span><b>Дні 31–60:</b> три окремих плани = <em class="em">навантаження × 50%</em> по кожному. ОТ важить 50%, Послуги 30%, АСС 20%. Макс. 130% по кожному.</span>
-    </div>
-    <div class="fn-item">
-      <span><b>Оклад озвучує директор</b> на співбесіді. Саме від нього рахується все вище.</span>
-    </div>
-    <div class="fn-item">
-      <span><b>Конкурсні бонуси</b> додаються зверху до окладу, якщо він є більшим варіантом виплати.</span>
-    </div>
-    <div class="fn-item">
-      <span><b>ЗП формується по календарних місяцях.</b> Якщо стажування переходить через місяць — кожна частина рахується окремо.</span>
-    </div>
-    <div class="fn-item">
-      <span><b>Досвідчений новачок:</b> стажування може тривати лише <em class="em">10 днів</em> — уточнюй у директора.</span>
-    </div>
-  </div>
+  <div class="cheat-item"><b>Дні 1–7:</b> плану немає, виконання = <em>100%</em> автоматично. Оклад = базовий × Кр.ч.</div>
+  <div class="cheat-item"><b>Дні 8–30:</b> один план = <em>навантаження ПК × 25%</em>. Оклад = базовий × % виконання, макс. 100%. Продажі з 1-го дня йдуть у залік.</div>
+  <div class="cheat-item"><b>Дні 31–60:</b> три плани = навантаження × <em>50% / 25% / 50%</em> (ТО / Послуги / АСС). Вага в окладі: 50 / 30 / 20%. Макс. 130% по кожному.</div>
+  <div class="cheat-item"><b>Дні 61–90:</b> три плани = навантаження × <em>75% / 50% / 75%</em>. Вага та максимум (130%) — ті самі, що й раніше.</div>
+  <div class="cheat-item"><b>Оклад озвучує директор</b> на співбесіді — саме від нього рахується все вище.</div>
+  <div class="cheat-item"><b>Конкурсні бонуси</b> додаються зверху до окладу, якщо він є більшим варіантом виплати.</div>
+  <div class="cheat-item"><b>ЗП формується по календарних місяцях.</b> Якщо стажування переходить через місяць — кожна частина рахується окремо.</div>
+  <div class="cheat-item"><b>Досвідчений новачок:</b> стажування може тривати лише <em>10 днів</em> — уточнюй у директора.</div>
+  <div class="cheat-item"><b>Дата дії:</b> система застосовується для стажистів, прийнятих на роботу <em>з 3 червня 2026 р.</em> Для прийнятих раніше — розрахунок за попереднім розпорядженням.</div>
 
 </div>
 
@@ -574,14 +587,27 @@ function toggleTheme(){
   }
 }
 
-function switchTab(idx){
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
-  if(idx===3){calc1();calc2();}
+function switchTab(panelId){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.panel===panelId));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===panelId));
+}
+
+function openCalcModal(){
+  document.getElementById('calcModal').classList.add('active');
+  calc0();calc1();calc2();calc3();
+}
+function closeCalcModal(){
+  document.getElementById('calcModal').classList.remove('active');
 }
 
 function money(n){return Math.round(n).toLocaleString('uk-UA')+'\u00a0грн'}
 function pct(v){return Math.round(v)+'%'}
+
+function calc0(){
+  const base=parseInt(document.getElementById('sl0base').value);
+  document.getElementById('c0base').textContent=money(base);
+  document.getElementById('r0oklad').textContent=money(base);
+}
 
 function calc1(){
   const base=parseInt(document.getElementById('sl1base').value);
@@ -603,7 +629,6 @@ function calc2(){
   const acc=parseInt(document.getElementById('sl2acc').value);
   document.getElementById('c2base').textContent=money(base);
   document.getElementById('c2ot').textContent=pct(ot);
-  document.getElementById('c2serv').textContent=money(serv)===money(0)?pct(serv):pct(serv);
   document.getElementById('c2serv').textContent=pct(serv);
   document.getElementById('c2acc').textContent=pct(acc);
   const otInc=base*0.5*ot/100;
@@ -622,8 +647,33 @@ function calc2(){
   ro.style.color=ratio>=1.2?'var(--green)':ratio>=1?'var(--teal)':ratio>=0.7?'var(--gold)':'var(--red)';
 }
 
+function calc3(){
+  const base=parseInt(document.getElementById('sl3base').value);
+  const ot=parseInt(document.getElementById('sl3ot').value);
+  const serv=parseInt(document.getElementById('sl3serv').value);
+  const acc=parseInt(document.getElementById('sl3acc').value);
+  document.getElementById('c3base').textContent=money(base);
+  document.getElementById('c3ot').textContent=pct(ot);
+  document.getElementById('c3serv').textContent=pct(serv);
+  document.getElementById('c3acc').textContent=pct(acc);
+  const otInc=base*0.5*ot/100;
+  const servInc=base*0.3*serv/100;
+  const accInc=base*0.2*acc/100;
+  const total=otInc+servInc+accInc;
+  const maxPossible=base*1.3;
+  document.getElementById('r3oklad').textContent=money(total);
+  document.getElementById('r3ratio').textContent=pct(Math.round(total/base*100));
+  document.getElementById('r3max').textContent=money(maxPossible);
+  document.getElementById('rd3ot').textContent=money(otInc);
+  document.getElementById('rd3serv').textContent=money(servInc);
+  document.getElementById('rd3acc').textContent=money(accInc);
+  const ro=document.getElementById('r3oklad');
+  const ratio=total/base;
+  ro.style.color=ratio>=1.2?'var(--green)':ratio>=1?'var(--teal)':ratio>=0.7?'var(--gold)':'var(--red)';
+}
+
 /* ─── DATE CALCULATOR ─── */
-const BASE_RATE = 17000;
+const BASE_RATE = 18000;
 const DAYS_PER_MONTH_CALC = 30;
 
 function addDays(date, n){const d=new Date(date);d.setDate(d.getDate()+n);return d;}
@@ -643,65 +693,62 @@ function splitIntoMonths(startDate, endDate){
 }
 
 function inputRow(label,color,id,oninputCall){
-  return `<div style="margin-bottom:8px">
-    <div style="font-size:11px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">${label}</div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <input type="number" id="${id}" placeholder="0" min="0" max="130"
-        style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:14px;font-weight:700;padding:7px 10px;outline:none"
+  return `<div class="field-row">
+    <div class="field-lbl" style="color:${color}">${label}</div>
+    <div class="field-input-wrap">
+      <input type="number" class="field-input" id="${id}" placeholder="0" min="0" max="130"
         oninput="${oninputCall}">
-      <span style="font-size:12px;color:var(--muted);flex-shrink:0">%</span>
-      <div id="${id}_res" style="min-width:80px;text-align:right;font-size:13px;font-weight:800;color:var(--muted)">—</div>
+      <span class="field-pct">%</span>
+      <div class="field-res" id="${id}_res">—</div>
     </div>
   </div>`;
 }
 
 function chunkCard(chunk,period,factId){
   const base=BASE_RATE/DAYS_PER_MONTH_CALC*chunk.days;
-  const ac=period===1?'var(--blue)':'var(--teal)';
+  const acMap={0:'var(--muted)',1:'var(--blue)',2:'var(--teal)',3:'var(--gold)'};
+  const ac=acMap[period];
 
   let factBlock='';
-  if(period===1){
+  if(period===0){
+    factBlock=`<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)">
+      Плану немає — <b style="color:var(--text)">100% гарантовано</b> незалежно від фактичних продажів.
+    </div>`;
+  } else if(period===1){
     const max100=base;
     factBlock=`<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px">Факт виконання</div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="${factId}" placeholder="0" min="0" max="100"
-          style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--text);font-size:15px;font-weight:700;padding:8px 12px;outline:none"
+      <div class="field-lbl" style="color:var(--muted);margin-bottom:8px">Факт виконання</div>
+      <div class="field-input-wrap">
+        <input type="number" class="field-input" id="${factId}" placeholder="0" min="0" max="100"
           oninput="updateFact1('${factId}',${max100})">
-        <span style="font-size:13px;color:var(--muted)">%</span>
-        <div id="${factId}_res" style="min-width:90px;text-align:right;font-size:15px;font-weight:800;color:var(--muted)">—</div>
+        <span class="field-pct">%</span>
+        <div class="field-res" id="${factId}_res">—</div>
       </div>
     </div>`;
   } else {
-    // period 2: three separate metrics
-    const otMax=base*0.5;   // weight 50%
-    const servMax=base*0.3; // weight 30%
-    const accMax=base*0.2;  // weight 20%
+    const otMax=base*0.5, servMax=base*0.3, accMax=base*0.2;
     factBlock=`<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px">Факт виконання (макс. 130% по кожному)</div>
+      <div class="field-lbl" style="color:var(--muted);margin-bottom:10px">Факт виконання (макс. 130% по кожному)</div>
       ${inputRow('ТО · вага 50%','var(--blue)',factId+'_ot','updateFact2(\''+factId+'\')')}
       ${inputRow('Послуги · вага 30%','var(--teal)',factId+'_serv','updateFact2(\''+factId+'\')')}
       ${inputRow('АСС · вага 20%','var(--gold)',factId+'_acc','updateFact2(\''+factId+'\')')}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border2)">
-        <span style="font-size:12px;color:var(--muted);font-weight:700">Разом за цей шматок</span>
-        <div id="${factId}_total" style="font-size:17px;font-weight:900;color:var(--muted)">—</div>
+        <span style="font-size:12px;color:var(--muted);font-weight:600">Разом за цей період</span>
+        <div id="${factId}_total" style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--muted)">—</div>
       </div>
-    </div>`;
-    // store max values as data attrs via a hidden span
-    factBlock+=`<span id="${factId}_meta" data-otmax="${otMax}" data-servmax="${servMax}" data-accmax="${accMax}" style="display:none"></span>`;
+    </div>
+    <span id="${factId}_meta" data-otmax="${otMax}" data-servmax="${servMax}" data-accmax="${accMax}" style="display:none"></span>`;
   }
 
-  const maxLabel=period===1
-    ? `<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--muted)">Макс. бонус (100%)</span><span style="font-size:15px;font-weight:800;color:${ac}">${money(base)}</span></div>`
-    : `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--muted)">Макс. при 100%</span><span style="font-size:14px;font-weight:800;color:${ac}">${money(base)}</span></div>
-       <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--muted)">Макс. при 130%</span><span style="font-size:14px;font-weight:800;color:var(--green)">${money(base*1.3)}</span></div>`;
+  const maxLabel=(period===0||period===1)
+    ? `<div class="period-total" style="padding:0;border:none;margin-bottom:0"><span class="l" style="text-transform:none;font-family:var(--sans)">${period===0?'Гарантовано':'Макс. бонус (100%)'}</span><span class="v" style="font-size:15px;color:${ac}">${money(base)}</span></div>`
+    : `<div class="period-total" style="padding:0;border:none;margin-bottom:6px"><span class="l" style="text-transform:none;font-family:var(--sans)">Макс. при 100%</span><span class="v" style="font-size:14px;color:${ac}">${money(base)}</span></div>
+       <div class="period-total" style="padding:0;border:none;margin-bottom:0"><span class="l" style="text-transform:none;font-family:var(--sans)">Макс. при 130%</span><span class="v" style="font-size:14px;color:var(--green)">${money(base*1.3)}</span></div>`;
 
-  const bg = period===1 ? "rgba(79,142,247,0.06)" : "rgba(29,212,180,0.06)";
-  return `<div style="background:${bg};border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:10px">
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:${ac};margin-bottom:6px">${chunk.monthLabel}</div>
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
-      <div style="font-size:17px;font-weight:900;color:var(--text);letter-spacing:-.3px">${formatDate(chunk.from)} – ${formatDate(chunk.to)}</div>
-      <div style="background:var(--bg3);border:1px solid ${ac};border-radius:20px;padding:4px 12px;font-size:13px;font-weight:800;color:${ac};flex-shrink:0;margin-left:10px">${chunk.days} дн.</div>
+  return `<div class="chunk-card" style="border-left-color:${ac}">
+    <div class="chunk-top">
+      <div class="chunk-date">${formatDate(chunk.from)} – ${formatDate(chunk.to)}</div>
+      <div class="chunk-days">${chunk.days} дн.</div>
     </div>
     ${maxLabel}
     ${factBlock}
@@ -741,7 +788,7 @@ function updateFact2(factId){
 
   const total=document.getElementById(factId+'_total');
   const sum=otE+sE+aE;
-  const base=otMax+servMax+accMax; // = BASE_RATE/30*days
+  const base=otMax+servMax+accMax;
   if(sum===0){total.textContent='—';total.style.color='var(--muted)';return;}
   total.textContent=money(sum);
   total.style.color=sum>=base*1.3?'var(--green)':sum>=base?'var(--teal)':sum>=base*0.7?'var(--gold)':'var(--red)';
@@ -749,28 +796,51 @@ function updateFact2(factId){
 
 function calcDates(){
   const val=document.getElementById('startDate').value;
-  if(!val){document.getElementById('dateResult').style.display='none';return;}
+  if(!val){document.getElementById('dateResult').style.display='none';document.getElementById('dateHint').style.display='block';return;}
+  document.getElementById('dateHint').style.display='none';
   const start=new Date(val+'T00:00:00');
+  const p0End=addDays(start,6);
+  const p1Start=addDays(start,7);
   const p1End=addDays(start,29);
   const p2Start=addDays(start,30);
   const p2End=addDays(start,59);
-  document.getElementById('p1title').textContent=formatDate(start)+' – '+formatDate(p1End);
+  const p3Start=addDays(start,60);
+  const p3End=addDays(start,89);
+
+  document.getElementById('p0title').textContent=formatDate(start)+' – '+formatDate(p0End);
+  document.getElementById('p1title').textContent=formatDate(p1Start)+' – '+formatDate(p1End);
   document.getElementById('p2title').textContent=formatDate(p2Start)+' – '+formatDate(p2End);
-  const p1ch=splitIntoMonths(start,p1End);
+  document.getElementById('p3title').textContent=formatDate(p3Start)+' – '+formatDate(p3End);
+
+  const p0ch=splitIntoMonths(start,p0End);
+  const p1ch=splitIntoMonths(p1Start,p1End);
   const p2ch=splitIntoMonths(p2Start,p2End);
+  const p3ch=splitIntoMonths(p3Start,p3End);
+
+  document.getElementById('p0chunks').innerHTML=p0ch.map((ch,i)=>chunkCard(ch,0,'fact_p0_'+i)).join('');
   document.getElementById('p1chunks').innerHTML=p1ch.map((ch,i)=>chunkCard(ch,1,'fact_p1_'+i)).join('');
   document.getElementById('p2chunks').innerHTML=p2ch.map((ch,i)=>chunkCard(ch,2,'fact_p2_'+i)).join('');
+  document.getElementById('p3chunks').innerHTML=p3ch.map((ch,i)=>chunkCard(ch,3,'fact_p3_'+i)).join('');
+
+  const p0tot=p0ch.reduce((s,ch)=>s+BASE_RATE/DAYS_PER_MONTH_CALC*ch.days,0);
   const p1tot=p1ch.reduce((s,ch)=>s+BASE_RATE/DAYS_PER_MONTH_CALC*ch.days,0);
   const p2tot100=p2ch.reduce((s,ch)=>s+BASE_RATE/DAYS_PER_MONTH_CALC*ch.days,0);
   const p2tot130=p2tot100*1.3;
+  const p3tot100=p3ch.reduce((s,ch)=>s+BASE_RATE/DAYS_PER_MONTH_CALC*ch.days,0);
+  const p3tot130=p3tot100*1.3;
+
+  document.getElementById('p0total').textContent=money(p0tot);
   document.getElementById('p1total').textContent=money(p1tot);
   document.getElementById('p2total100').textContent=money(p2tot100);
   document.getElementById('p2total130').textContent=money(p2tot130);
-  document.getElementById('grand100').textContent=money(p1tot+p2tot100);
-  document.getElementById('grand130').textContent=money(p1tot+p2tot130);
+  document.getElementById('p3total100').textContent=money(p3tot100);
+  document.getElementById('p3total130').textContent=money(p3tot130);
+
+  document.getElementById('grand100').textContent=money(p0tot+p1tot+p2tot100+p3tot100);
+  document.getElementById('grand130').textContent=money(p0tot+p1tot+p2tot130+p3tot130);
   document.getElementById('dateResult').style.display='block';
 }
 
-calc1();calc2();</script>
+calc0();calc1();calc2();calc3();</script>
 </body>
 </html>
